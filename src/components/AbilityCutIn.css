@@ -1,0 +1,81 @@
+.ability-cut-in {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.45);
+  animation: cutInFade 1.1s ease forwards;
+}
+
+@keyframes cutInFade {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.cut-in-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(135deg, rgba(20, 16, 12, 0.98), rgba(8, 6, 5, 0.98));
+  border: 3px solid var(--token-color, #9bea2c);
+  border-radius: 12px;
+  box-shadow: 0 0 40px var(--token-glow, rgba(155, 234, 44, 0.3));
+  animation: cutInPop 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  max-width: min(420px, 92vw);
+}
+
+@keyframes cutInPop {
+  from { transform: scale(0.85) translateY(12px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.cut-in-portrait {
+  width: 88px;
+  height: 110px;
+  object-fit: cover;
+  object-position: center 8%;
+  border-radius: 8px;
+  border: 3px solid var(--token-color, #9bea2c);
+  flex-shrink: 0;
+}
+
+.cut-in-text small {
+  display: block;
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  color: #9bea2c;
+  margin-bottom: 0.25rem;
+}
+
+.cut-in-text strong {
+  display: block;
+  font-family: 'Bangers', cursive;
+  font-size: 1.5rem;
+  letter-spacing: 0.06em;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.cut-in-text p {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  color: #bbb;
+  line-height: 1.35;
+}
+
+.cut-in-card.token-blue { --token-color: #3b9eff; --token-glow: rgba(59, 158, 255, 0.4); }
+.cut-in-card.token-orange { --token-color: #ff8c2a; --token-glow: rgba(255, 140, 42, 0.4); }
+.cut-in-card.token-green { --token-color: #3dcc5a; --token-glow: rgba(61, 204, 90, 0.4); }
+.cut-in-card.token-pink { --token-color: #ff5ca8; --token-glow: rgba(255, 92, 168, 0.4); }
+.cut-in-card.token-gold { --token-color: #f5c842; --token-glow: rgba(245, 200, 66, 0.4); }
+.cut-in-card.token-purple { --token-color: #b06aff; --token-glow: rgba(176, 106, 255, 0.4); }
+.cut-in-card.token-red { --token-color: #ff4444; --token-glow: rgba(255, 68, 68, 0.4); }
+.cut-in-card.token-teal { --token-color: #2ecfc7; --token-glow: rgba(46, 207, 199, 0.4); }
+.cut-in-card.token-rust { --token-color: #e87830; --token-glow: rgba(232, 120, 48, 0.4); }
+.cut-in-card.token-jade { --token-color: #28a870; --token-glow: rgba(40, 168, 112, 0.4); }

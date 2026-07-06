@@ -1,0 +1,192 @@
+/* ── Gameplay survivor token (circular avatar) ── */
+
+.survivor-token {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.token-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 3px solid var(--token-color, #9bea2c);
+  box-shadow: 0 0 12px var(--token-glow, rgba(155, 234, 44, 0.35));
+  pointer-events: none;
+}
+
+.token-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 12%;
+  background: #1a1410;
+  display: block;
+}
+
+.survivor-token.size-xs { width: 36px; height: 36px; }
+.survivor-token.size-sm { width: 48px; height: 48px; }
+.survivor-token.size-md { width: 64px; height: 64px; }
+.survivor-token.size-lg { width: 80px; height: 80px; }
+.survivor-token.size-xl { width: 96px; height: 96px; }
+
+.token-blue { --token-color: #3b9eff; --token-glow: rgba(59, 158, 255, 0.45); }
+.token-orange { --token-color: #ff8c2a; --token-glow: rgba(255, 140, 42, 0.45); }
+.token-green { --token-color: #3dcc5a; --token-glow: rgba(61, 204, 90, 0.45); }
+.token-pink { --token-color: #ff5ca8; --token-glow: rgba(255, 92, 168, 0.45); }
+.token-gold { --token-color: #f5c842; --token-glow: rgba(245, 200, 66, 0.45); }
+.token-purple { --token-color: #b06aff; --token-glow: rgba(176, 106, 255, 0.45); }
+.token-red { --token-color: #ff4444; --token-glow: rgba(255, 68, 68, 0.45); }
+.token-teal { --token-color: #2ecfc7; --token-glow: rgba(46, 207, 199, 0.45); }
+.token-rust { --token-color: #e87830; --token-glow: rgba(232, 120, 48, 0.45); }
+.token-jade { --token-color: #28a870; --token-glow: rgba(40, 168, 112, 0.45); }
+
+.survivor-token.token-glow .token-ring {
+  animation: tokenPulse 0.8s ease-in-out infinite alternate;
+}
+
+.survivor-token.token-active .token-ring {
+  border-width: 4px;
+  box-shadow: 0 0 18px var(--token-glow);
+}
+
+@keyframes tokenPulse {
+  from { box-shadow: 0 0 8px var(--token-glow); }
+  to { box-shadow: 0 0 20px var(--token-glow); }
+}
+
+.survivor-token.pose-run {
+  animation: tokenRunBob 0.35s ease-in-out infinite alternate;
+}
+
+.survivor-token.pose-lick {
+  animation: tokenLick 0.5s ease-in-out infinite alternate;
+}
+
+.survivor-token.pose-bath {
+  animation: tokenBob 2s ease-in-out infinite;
+}
+
+@keyframes tokenRunBob {
+  from { transform: translateY(0); }
+  to { transform: translateY(-3px); }
+}
+
+@keyframes tokenLick {
+  from { transform: rotate(-2deg); }
+  to { transform: rotate(4deg); }
+}
+
+@keyframes tokenBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.token-label {
+  margin-top: 0.2rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+  color: #ccc;
+  white-space: nowrap;
+}
+
+.hud-portrait {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.6rem 0.35rem 0.35rem;
+  background: rgba(10, 8, 8, 0.88);
+  border: 2px solid var(--token-color, #666);
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.hud-portrait-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 10%;
+  border: 2px solid var(--token-color, #888);
+}
+
+.hud-portrait-meta strong {
+  display: block;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
+.hud-portrait-meta small {
+  display: block;
+  font-size: 0.55rem;
+  color: #9bea2c;
+  letter-spacing: 0.06em;
+}
+
+.hud-portrait-slot {
+  position: fixed;
+  top: 4.5rem;
+  left: 0.75rem;
+  z-index: 190;
+}
+
+.bubble-hud-portrait {
+  top: 3.75rem;
+}
+
+/* ── Outrun lane tokens ── */
+
+.stage-runner-wrap {
+  position: absolute;
+  left: 21%;
+  top: calc((var(--lane, 1) + 0.5) * (100% / var(--lane-count, 3)));
+  transform: translate(-50%, -50%);
+  transition: top 0.16s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 6;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stage-runner-wrap.npc-crew {
+  opacity: 0.82;
+  filter: saturate(0.85);
+  z-index: 5;
+}
+
+.stage-runner-wrap.active-crew {
+  z-index: 7;
+}
+
+.stage-runner-wrap.active-crew .survivor-token {
+  filter: drop-shadow(0 0 10px rgba(109, 255, 109, 0.45));
+}
+
+.stage-runner-wrap .stage-shield {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.9));
+  animation: shieldPulse 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes shieldPulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.15); }
+}
+
+/* ── Plate showdown side tokens ── */
+
+.showdown-actor.survivor-token {
+  margin-bottom: 0.35rem;
+  z-index: 2;
+}
+
+.showdown-side.rival-side .showdown-actor.contestant-rival {
+  opacity: 0.92;
+}
